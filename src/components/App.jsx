@@ -28,6 +28,10 @@ function App() {
     }
   };
 
+  const addMessage = (data) => {
+    localStorage.setItem('messages', JSON.stringify(data));
+  };
+
   useEffect(() => {
     getSessionStorate();
     document.title = owner;
@@ -49,7 +53,10 @@ function App() {
             />
           }
         />
-        <Route path="/chat" element={<Chat owner={owner} />} />
+        <Route
+          path="/chat"
+          element={<Chat owner={owner} handleMessage={addMessage} />}
+        />
       </Routes>
     </div>
   );
