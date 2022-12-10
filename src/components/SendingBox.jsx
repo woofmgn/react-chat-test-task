@@ -21,13 +21,13 @@ const SendingBox = ({ onAddMessage, owner, onChangeLastMessage }) => {
 
     onAddMessage(message);
     onChangeLastMessage(message);
-
+    setInputChange('');
     window.dispatchEvent(new Event('storage'));
   };
 
   return (
-    <Form onSubmitCapture={handleSubmit}>
-      <Input.Group compact className="d-flex" on>
+    <Form onSubmitCapture={handleSubmit} style={{ marginTop: 14 }}>
+      <Input.Group compact className="d-flex">
         <Input value={'' || inputChange} onChange={handleChangeInput} />
         <Button type="primary" htmlType="submit">
           Отправить

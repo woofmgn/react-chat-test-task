@@ -29,6 +29,7 @@ const Chat = ({ owner, onAddMessage, onGetMessages }) => {
             <MessageList
               onGetMessages={onGetMessages}
               newMessage={newMessage}
+              owner={owner}
             />
           </Col>
         </Row>

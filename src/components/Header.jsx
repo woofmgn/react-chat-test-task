@@ -1,24 +1,11 @@
-import { Menu } from 'antd';
-
 import React from 'react';
+import '../styles/Header.css';
 
 const Header = () => {
   return (
-    <>
-      <div className="logo" />
-      <Menu
-        theme="dark"
-        mode="horizontal"
-        defaultSelectedKeys={['2']}
-        items={new Array(15).fill(null).map((_, index) => {
-          const key = index + 1;
-          return {
-            key,
-            label: `nav ${key}`,
-          };
-        })}
-      />
-    </>
+    <header className="header">
+      <h1 className="header__title">Добро пожаловать в чат</h1>
+    </header>
   );
 };
 

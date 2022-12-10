@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import Chat from './Chat';
+import Footer from './Footer';
 import Header from './Header';
 import LoginPage from './LoginPage';
+import ProtectedRoute from './ProtectedRoute';
 
 function App() {
   const [isLogged, setIsLogged] = useState(false);
   const [owner, setOwner] = useState('');
-
   const navigate = useNavigate();
 
   const updateSessionStorage = (newUser) => {
@@ -20,20 +21,6 @@ function App() {
   const getSessionStorate = () => {
     setOwner(() => JSON.parse(sessionStorage.getItem('user')));
   };
-
-  // const loginUser = () => {
-  //   const user = JSON.parse(sessionStorage.getItem('user'));
-  //   if (user !== null && user.length !== 0) {
-  //     navigate('/');
-  //   }
-  // };
-
-  // const loginUser = () => {
-  //   const user = JSON.parse(sessionStorage.getItem('user'));
-  //   if (user) {
-  //     navigate('/chat');
-  //   }
-  // };
 
   const addMessage = (data) => {
     const storage = JSON.parse(localStorage.getItem('messages')) || [];
@@ -52,8 +39,6 @@ function App() {
 
   useEffect(() => {
     getSessionStorate();
-    // document.title = owner;
-    // loginUser();
   }, [owner]);
 
   return (
@@ -70,7 +55,7 @@ function App() {
             />
           }
         />
-        <Route
+        {/* <Route
           path="/chat"
           element={
             <Chat
@@ -79,8 +64,22 @@ function App() {
               onGetMessages={getMessage}
             />
           }
+        /> */}
+        <Route
+          path="/chat"
+          element={
+            <ProtectedRoute isLogged={isLogged}>
+              {' '}
+              <Chat
+                owner={owner}
+                onAddMessage={addMessage}
+                onGetMessages={getMessage}
+              />
+            </ProtectedRoute>
+          }
         />
       </Routes>
+      <Footer />
     </div>
   );
 }

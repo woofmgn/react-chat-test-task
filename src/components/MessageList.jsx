@@ -2,12 +2,13 @@ import React, { useEffect, useRef, useState } from 'react';
 import '../styles/MessageList.css';
 import Message from './Message';
 
-const MessageList = ({ onGetMessages, newMessage }) => {
+const MessageList = ({ onGetMessages, newMessage, owner }) => {
   const [messageList, setMessageList] = useState([]);
   const lastMessage = useRef(null);
 
   const checkNewMessage = () => {
     setMessageList(onGetMessages);
+    scrollToBottom();
   };
 
   const scrollToBottom = () => {
@@ -27,14 +28,19 @@ const MessageList = ({ onGetMessages, newMessage }) => {
 
   return (
     <>
-      <ul className="message-list" ref={lastMessage}>
+      <ul className="message-list">
         {messageList &&
           messageList.map((item) => {
             return (
-              <Message key={item.id} text={item.text} author={item.name} />
+              <Message
+                key={item.id}
+                text={item.text}
+                author={item.name}
+                owner={owner}
+              />
             );
           })}
-        <div />
+        <div ref={lastMessage} />
       </ul>
     </>
   );
