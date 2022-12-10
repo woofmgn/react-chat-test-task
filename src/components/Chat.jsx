@@ -4,8 +4,9 @@ import { v4 as uuidv4 } from 'uuid';
 import Message from '../components/Message';
 import '../styles/Chat.css';
 
-const Chat = ({ owner, handleMessage }) => {
+const Chat = ({ owner, handleAddMessage, handleGetMessages }) => {
   const [inputChange, setInputChange] = useState('');
+  const [messageList, setMessageList] = useState([]);
 
   const handleChangeInput = (evt) => {
     setInputChange(() => evt.target.value);
@@ -21,20 +22,24 @@ const Chat = ({ owner, handleMessage }) => {
       text: inputChange,
     };
 
-    handleMessage(message);
+    handleAddMessage(message);
+    window.dispatchEvent(new Event('storage'));
+  };
+
+  const checkNewMessage = () => {
+    setMessageList(handleGetMessages);
   };
 
   useEffect(() => {
     const prevTitle = document.title;
     document.title = owner;
+    setMessageList(handleGetMessages);
+    console.log(messageList);
 
-    // window.addEventListener("storage", () => {
-    //   // When storage changes refetch
-    //   refetch();
-    // });
+    window.addEventListener('storage', checkNewMessage);
     return () => {
       document.title = prevTitle;
-      // window.removeEventListener("storage");
+      window.removeEventListener('storage', checkNewMessage);
     };
   }, [owner]);
 
@@ -44,7 +49,16 @@ const Chat = ({ owner, handleMessage }) => {
         <Row>
           <Col span={11} offset={1}>
             <ul>
-              <Message />
+              {messageList &&
+                messageList.map((item) => {
+                  return (
+                    <Message
+                      key={item.id}
+                      text={item.text}
+                      author={item.name}
+                    />
+                  );
+                })}
             </ul>
           </Col>
         </Row>

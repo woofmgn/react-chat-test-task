@@ -19,6 +19,7 @@ const LoginPage = ({ handleLogin, loadTitle, owner }) => {
     loadTitle();
     document.title = owner;
   }, [owner]);
+
   return (
     <Row className="d-flex justify-content-center">
       <Col className="d-flex align-items-center">

@@ -29,7 +29,18 @@ function App() {
   };
 
   const addMessage = (data) => {
-    localStorage.setItem('messages', JSON.stringify(data));
+    const storage = JSON.parse(localStorage.getItem('messages')) || [];
+    const cloneArr = structuredClone(storage);
+    const newStorage = [...cloneArr, data];
+
+    localStorage.setItem('messages', JSON.stringify(newStorage));
+  };
+
+  const getMessage = () => {
+    const storage = JSON.parse(localStorage.getItem('messages'));
+    if (storage) {
+      return storage;
+    }
   };
 
   useEffect(() => {
@@ -55,7 +66,13 @@ function App() {
         />
         <Route
           path="/chat"
-          element={<Chat owner={owner} handleMessage={addMessage} />}
+          element={
+            <Chat
+              owner={owner}
+              handleAddMessage={addMessage}
+              handleGetMessages={getMessage}
+            />
+          }
         />
       </Routes>
     </div>
