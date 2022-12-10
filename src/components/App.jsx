@@ -47,13 +47,7 @@ function App() {
       <Routes>
         <Route
           path="/"
-          element={
-            <LoginPage
-              handleLogin={updateSessionStorage}
-              onLoadTitle={getSessionStorate}
-              owner={owner}
-            />
-          }
+          element={<LoginPage handleLogin={updateSessionStorage} />}
         />
         {/* <Route
           path="/chat"
