@@ -1,8 +1,8 @@
 import { UserOutlined } from '@ant-design/icons';
 import { Button, Card, Col, Form, Input, Row } from 'antd';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
-const LoginPage = ({ handleLogin, loadTitle, owner }) => {
+const LoginPage = ({ handleLogin, onLoadTitle, owner }) => {
   const [userValue, setUserValue] = useState();
 
   const handleCghangeUser = (evt) => {
@@ -15,10 +15,10 @@ const LoginPage = ({ handleLogin, loadTitle, owner }) => {
     setUserValue('');
   };
 
-  useEffect(() => {
-    loadTitle();
-    document.title = owner;
-  }, [owner]);
+  // useEffect(() => {
+  //   onLoadTitle();
+  //   document.title = owner;
+  // }, [owner]);
 
   return (
     <Row className="d-flex justify-content-center">

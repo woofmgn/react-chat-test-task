@@ -21,12 +21,19 @@ function App() {
     setOwner(() => JSON.parse(sessionStorage.getItem('user')));
   };
 
-  const loginUser = () => {
-    const user = JSON.parse(sessionStorage.getItem('user'));
-    if (user !== null && user.length !== 0) {
-      navigate('/chat');
-    }
-  };
+  // const loginUser = () => {
+  //   const user = JSON.parse(sessionStorage.getItem('user'));
+  //   if (user !== null && user.length !== 0) {
+  //     navigate('/');
+  //   }
+  // };
+
+  // const loginUser = () => {
+  //   const user = JSON.parse(sessionStorage.getItem('user'));
+  //   if (user) {
+  //     navigate('/chat');
+  //   }
+  // };
 
   const addMessage = (data) => {
     const storage = JSON.parse(localStorage.getItem('messages')) || [];
@@ -45,9 +52,8 @@ function App() {
 
   useEffect(() => {
     getSessionStorate();
-    document.title = owner;
-
-    loginUser();
+    // document.title = owner;
+    // loginUser();
   }, [owner]);
 
   return (
@@ -59,7 +65,7 @@ function App() {
           element={
             <LoginPage
               handleLogin={updateSessionStorage}
-              loadTitle={getSessionStorate}
+              onLoadTitle={getSessionStorate}
               owner={owner}
             />
           }
@@ -69,8 +75,8 @@ function App() {
           element={
             <Chat
               owner={owner}
-              handleAddMessage={addMessage}
-              handleGetMessages={getMessage}
+              onAddMessage={addMessage}
+              onGetMessages={getMessage}
             />
           }
         />
