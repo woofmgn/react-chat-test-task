@@ -1,11 +1,25 @@
-## Available Scripts
+## Приложение чат
 
-In the project directory, you can run:
+### О приложении
 
-### `npm start`
+Приложение работает локально, в качестве хранилища сообщений используется Local Storage браузера.
+Для входа в чат необходимо ввести nickname. Можно открыть несколько вкладок, войти под разными никами и переписываться с самим собой :)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+При написании использовались:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- React 18.2
+- React Router 6.4
+- Ant Design
+
+### Для запуска приложенимя:
+
+В директории проекта небходимо установить зависимости командой:
+
+#### `npm install`
+
+После установки зависимостей, находясь в директории проекта, необходимо ввести в терминал команду:
+
+#### `npm run start`
+
+Приложение запустится в режиме разработки.\
+Откройте [http://localhost:3000](http://localhost:3000) в своем браузере.
