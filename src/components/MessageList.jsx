@@ -11,20 +11,19 @@ const MessageList = ({ onGetMessages, newMessage, owner }) => {
   };
 
   const checkNewMessage = () => {
-    setMessageList(onGetMessages);
+    setMessageList(() => onGetMessages());
     scrollToBottom();
   };
 
   useEffect(() => {
-    setMessageList(onGetMessages);
+    setMessageList(() => onGetMessages());
     window.addEventListener('storage', checkNewMessage);
     scrollToBottom();
-    console.log('скролл');
 
     return () => {
       window.removeEventListener('storage', checkNewMessage);
     };
-  }, [newMessage]);
+  }, [newMessage, lastMessage.current]);
 
   return (
     <>
