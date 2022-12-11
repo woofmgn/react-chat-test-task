@@ -6,13 +6,13 @@ const MessageList = ({ onGetMessages, newMessage, owner }) => {
   const [messageList, setMessageList] = useState([]);
   const lastMessage = useRef(null);
 
+  const scrollToBottom = () => {
+    lastMessage.current.scrollIntoView({ behavior: 'smooth' });
+  };
+
   const checkNewMessage = () => {
     setMessageList(onGetMessages);
     scrollToBottom();
-  };
-
-  const scrollToBottom = () => {
-    lastMessage.current.scrollIntoView({ behavior: 'smooth' });
   };
 
   useEffect(() => {
