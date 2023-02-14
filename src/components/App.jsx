@@ -47,7 +47,6 @@ function App() {
           path="/chat"
           element={
             <ProtectedRoute isLogged={isLogged}>
-              {' '}
               <Chat
                 owner={owner}
                 onAddMessage={addMessage}

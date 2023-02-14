@@ -1,29 +1,29 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import '../styles/MessageList.css';
 import Message from './Message';
 
 const MessageList = ({ onGetMessages, newMessage, owner }) => {
   const [messageList, setMessageList] = useState([]);
-  const lastMessage = useRef(null);
+  const lastMessage = useRef();
 
   const scrollToBottom = () => {
     lastMessage.current.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const checkNewMessage = () => {
+  const checkNewMessage = useCallback(() => {
     setMessageList(() => onGetMessages());
     scrollToBottom();
-  };
+  }, [onGetMessages]);
 
   useEffect(() => {
-    setMessageList(() => onGetMessages());
+    checkNewMessage();
+
     window.addEventListener('storage', checkNewMessage);
-    scrollToBottom();
 
     return () => {
       window.removeEventListener('storage', checkNewMessage);
     };
-  }, [newMessage, lastMessage.current]);
+  }, [checkNewMessage, newMessage, onGetMessages]);
 
   return (
     <>
